@@ -29,16 +29,16 @@
 # Also see our GitHub organization, https://github.com/redhat-actions/
 # ▶️ See a video of how to set up this workflow at https://www.youtube.com/watch?v=6hgBO-1pKho
 
-name: Test Build, Push and Deploy (quay.io)
+name: Test Build, Push and Deploy (ghcr.io)
 
 # ⬇️  Modify the fields marked with ⬇️ to fit your project, and create any secrets that are referenced.
 # https://docs.github.com/en/free-pro-team@latest/actions/reference/encrypted-secrets
 env:
   # ⬇️ EDIT with your registry and registry path.
-  REGISTRY: quay.io/redhat-github-actions
+  REGISTRY: ghcr.io/${{ github.repository_owner }}
   # ⬇️ EDIT with your registry username.
-  REGISTRY_USER: redhat-github-actions+redhat_actions_ci_pusher
-  REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
+  REGISTRY_USER: ${{ github.actor }}
+  REGISTRY_PASSWORD: ${{ github.token }}
 
   # ⬇️ EDIT to log into your OpenShift cluster and set up the context.
   # See https://github.com/redhat-actions/oc-login#readme for how to retrieve these values.
@@ -52,7 +52,7 @@ env:
   OPENSHIFT_NAMESPACE: ""
 
   # If you wish to manually provide the APP_NAME and TAG, set them here, otherwise they will be auto-detected.
-  APP_NAME: "express-ts-test-quay"
+  APP_NAME: "express-ts-test-ghcr"
   TAG: ""
 
 on:
